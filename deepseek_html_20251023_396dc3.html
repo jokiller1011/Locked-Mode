@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Quiz - Limited Security</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .warning-banner {
+            background: #ff4444;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .quiz-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .security-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="warning-banner">
+        ⚠️ This is NOT a secure locked mode. For real assessments, use Google Forms Locked Mode on managed Chromebooks.
+    </div>
+
+    <div class="quiz-container">
+        <h1>Educational Quiz</h1>
+        
+        <div class="security-notice">
+            <strong>For Real Locked Mode:</strong>
+            <ul>
+                <li>Use Google Forms with Locked Mode enabled</li>
+                <li>Require school-managed Chromebooks</li>
+                <li>Configure through Google Workspace admin console</li>
+                <li>This web page cannot provide true security</li>
+            </ul>
+        </div>
+
+        <h2>Quiz Questions</h2>
+        
+        <div class="question">
+            <h3>Question 1: Math</h3>
+            <p>What is 15 × 6?</p>
+            <input type="number" id="q1">
+        </div>
+
+        <div class="question">
+            <h3>Question 2: Science</h3>
+            <p>What planet is known as the Red Planet?</p>
+            <input type="text" id="q2">
+        </div>
+
+        <button onclick="submitQuiz()" style="padding: 10px 20px; margin-top: 20px;">
+            Submit Answers
+        </button>
+    </div>
+
+    <script>
+        // Basic anti-cheat measures (easily bypassed)
+        let startTime = new Date();
+        let focusLost = 0;
+
+        window.addEventListener('blur', () => {
+            focusLost++;
+            alert(`Warning: Please do not switch away from the quiz. (Incident ${focusLost})`);
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                focusLost++;
+                alert(`Warning: Please return to the quiz tab. (Incident ${focusLost})`);
+            }
+        });
+
+        // Prevent right-click menu
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            alert('Right-click disabled during quiz');
+        });
+
+        function submitQuiz() {
+            const timeSpent = Math.round((new Date() - startTime) / 1000);
+            alert(`Quiz submitted!\nTime: ${timeSpent} seconds\nFocus issues: ${focusLost}\n\nRemember: This is not securely locked.`);
+        }
+
+        console.log('Educational quiz loaded - This does not provide real security');
+    </script>
+</body>
+</html>
